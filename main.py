@@ -1,20 +1,18 @@
 import sqlite3
 con = sqlite3.connect(":memory:")
 cur = con.cursor()
-
-def init_db():
-    cur.execute("""CREATE TABLE bank_accounts (
+cur.execute("""CREATE TABLE bank_accounts (
                 id  INTEGER PRIMARY KEY AUTOINCREMENT, 
                 name    TEXT NOT NULL, 
                 account TEXT NOT NULL, 
                 balance REAL DEFAULT 0.0)
                 """)
-    cur.execute("""INSERT INTO bank_accounts (id, name, account, balance) VALUES
+cur.execute("""INSERT INTO bank_accounts (id, name, account, balance) VALUES
                 (1, 'Marie Grace', 'Checking', 500),
                 (2, 'Jose Garcia', 'Savings', 300),
                 """)
-    con.commit()
-    print("Database successfully loaded!")
+con.commit()
+print("Database successfully loaded!")
 
 def account_info():
     cur.execute("SELECT name FROM bank_accounts WHERE id = ?", (id, ))
@@ -23,12 +21,23 @@ def account_info():
 def balance_display():
     cur.execute("SELECT account, balance FROM bank_accounts where id = ?", (id, ))
 
+def withdraw(id, amount):
+    if amount <= 0:
+        print("Error: Withdrawal amount cannot be negative or zero.")
+        return
+
+def deposit(id, amount):
+    if amount <= 0:
+        print("Error: Withdrawal amount cannot be negative or zero.")
+        return
+
 def withdepo():
+    amount = int(input("How much would you like to deal with today? "))
     choice = int(input("1. Withdrawal\n 2. Deposit"))
     if choice == 1:
-        withdraw()
+        withdraw(id, amount)
     elif choice == 2:
-        deposit()
+        deposit(id, amount)
 
 def menu():
     choice = 0
