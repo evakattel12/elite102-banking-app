@@ -62,10 +62,10 @@ def menu():
     choice = 0
     print("Welcome to the Banking App!")
     name = input("Please enter your name: ")
-    init_deposit = float(input("If you have a withdrawal or deposit to make, please type it here: "))
     while True:
         choice = int(input(" 1. Account Info \n 2. Balance \n 3. Withdrawal/Deposit \n 4. Exit "))
         if choice == 1:
+            init_deposit = float(input("If you have a withdrawal or deposit to make, please enter it here: "))
             account_info(name, init_deposit)
         elif choice == 2:
             balance_display()
